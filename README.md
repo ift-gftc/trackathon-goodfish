@@ -1,8 +1,6 @@
 # Good Fish
 ## A sustainable seafood marketplace
 
-## Problem Statement / Inspiration
-
 We were inspired by the problem of unsold bycatch becoming food waste. We chose to tackle this
 challenge to increase:
 - Food security,

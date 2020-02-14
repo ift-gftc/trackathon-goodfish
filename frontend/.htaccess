@@ -1,0 +1,36 @@
+AddHandler application/x-httpd-php56 .php
+## ************************************************************
+# Copyright (C) 2014 by IDS
+# CMS Name:	idsCMS - ver.1
+# > Contact me for any inquiries.
+# > E: support@ids-manado.com
+# > W: http://www.ids-manado.com
+## ***********************************************************
+#deny from all
+<IfModule mod_rewrite.c>
+	RewriteEngine On
+    #redirect to https
+    RewriteCond %{HTTPS} off
+    RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+	# Don't rewrite requests for any files, directories, or symbolic
+	# links (shortcuts) that exist on the filesystem.
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteCond %{REQUEST_FILENAME} !-d
+	RewriteCond %{REQUEST_FILENAME} !-l
+
+	# No rewrites for any images, because we don't want to start Phenotype engine to handle them
+	RewriteCond %{REQUEST_URI} !\.jpg$
+	RewriteCond %{REQUEST_URI} !\.jpeg$
+	RewriteCond %{REQUEST_URI} !\.gif$
+	RewriteCond %{REQUEST_URI} !\.png$
+	RewriteCond %{REQUEST_URI} !\.ico$
+	# Send requests to index.php, appending the query string part.
+	RewriteRule ^(.*)$ index.php?page=$1  [QSA,L]
+
+    <FilesMatch "\.(ttf|ttc|otf|eot|woff|woff2|font.css|css)$">
+        Header set Access-Control-Allow-Origin "*"
+    </FilesMatch>
+
+</IfModule>
+

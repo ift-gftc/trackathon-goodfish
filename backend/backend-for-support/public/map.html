@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>KML Click Capture Sample</title>
+    <style>
+      html, body {
+        padding: 20;
+        margin: 0;
+      }
+      #map {
+        height: 400px;  /* The height is 400 pixels */
+        width: 800px;  /* The width is the width of the web page */
+      }
+      #wrapper {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        width: 100%;
+        text-align: center;
+        margin: 0;
+        min-height: 200px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="wrapper">
+      <div id="map"></div>
+    </div>
+    <script>
+      var map;
+      var src = 'http://13.76.154.231:3000/WPP573.kml';
+
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: new google.maps.LatLng(0.886256,148.445297),
+          zoom: 5,
+          mapTypeId: 'terrain'
+        });
+        var uluru = {lat: 0.886256, lng: 148.445297};
+        var marker = new google.maps.Marker({position: uluru, map: map});
+
+        var kmlLayer = new google.maps.KmlLayer({
+          url: src,
+          map: map
+        });
+
+        kmlLayer.addListener('click', function(event) {
+          var content = event.featureData.infoWindowHtml;
+          console.log(event);
+        });
+      }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBvXkqPWgE9VPo4brJrfrZqZTtba-0hJlI&callback=initMap">
+    </script>
+  </body>
+</html>

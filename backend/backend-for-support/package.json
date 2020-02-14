@@ -1,0 +1,28 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@vechain/connex-framework": "^1.1.1",
+    "@vechain/connex.driver-nodejs": "^1.2.0-beta3",
+    "axios": "^0.19.0",
+    "cors": "^2.8.5",
+    "ejs": "^2.7.1",
+    "express": "^4.17.1",
+    "express-fileupload": "^1.1.6-alpha.6",
+    "fs": "0.0.1-security",
+    "ipfs-http-client": "^39.0.2",
+    "json-find": "^2.0.7",
+    "multer": "^1.4.2",
+    "pug": "^2.0.4",
+    "xml-formatter": "^1.2.0",
+    "xml2js": "^0.4.22"
+  }
+}

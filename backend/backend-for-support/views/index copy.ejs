@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Good Fish - MAP</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+    <style>
+      #map {
+        height: 400px;  /* The height is 400 pixels */
+      }
+      #kde {
+        max-width:400px;
+      }
+    </style>
+  </head>
+  <body>
+  <section class="section">
+    <div class="container">
+      <h1 class="title">
+        Good Fish
+      </h1>
+      <p class="subtitle">
+        Where my fish <strong>taken</strong>?
+      </p>
+      <div class="columns">
+        <div id="map" class="container"></div>
+      </div>
+      <div class="columns">
+        <p>&nbsp;</p>
+      </div>
+      <div class="columns">
+        <div class="container">
+          <pre class="prettyprint lang-html">
+            <%= json %>
+          </pre>
+        </div>
+      </div>
+    </div>
+  </section>
+  <script>
+    var map;
+    var src = 'http://13.76.154.231:3000/WPP573.kml';
+    var lat = <%- lat %>;
+    var lng = <%- lng %>;
+
+    function initMap() {
+      map = new google.maps.Map(document.getElementById('map'), {
+        center: new google.maps.LatLng(lat,lng),
+        zoom: 6,
+        mapTypeId: 'terrain'
+      });
+      var uluru = {lat: lat, lng: lng};
+      var marker = new google.maps.Marker({position: uluru, map: map});
+
+      var kmlLayer = new google.maps.KmlLayer({
+        url: src,
+        map: map
+      });
+
+      kmlLayer.addListener('click', function(event) {
+        var content = event.featureData.infoWindowHtml;
+        console.log(event);
+      });
+    }
+  </script>
+  <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBvXkqPWgE9VPo4brJrfrZqZTtba-0hJlI&callback=initMap">
+  </script>
+  </body>
+</html>
